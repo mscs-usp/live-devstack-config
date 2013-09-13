@@ -4,5 +4,12 @@ apt-get install git
 git clone https://github.com/mscs-usp/openstack-folsom-config.git
 cp -av openstack-folsom-config/interfaces /etc/network/interfaces
 
+sudo su
+ 
+groupadd stack
+useradd -g stack -s /bin/bash -d /opt/stack -m stack
+echo "stack ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+echo "openstack" | passwd stack --stdin
+
 git clone https://github.com/openstack-dev/devstack.git
 git checkout stable/folsom
