@@ -1,0 +1,55 @@
+SERVICE_HOST=10.11.0.40 # REMOVE THIS LINE FOR THE CONTROLLER
+# Stop DevStack polluting /opt/stack
+DESTDIR=/opt/stack/src/openstack
+
+# Switch to use QPid instead of RabbitMQ 
+##disable_service rabbit c-sch c-api c-vol
+disable_service c-vol
+#disable_service g-api
+#disable_service g-reg
+disable_service key
+disable_service n-crt
+disable_service n-obj
+disable_service n-cond
+disable_service cinder
+disable_service c-sch
+disable_service c-api
+disable_service c-vol
+disable_service c-sch
+disable_service n-novnc
+disable_service n-xvnc
+disable_service n-cauth
+disable_service horizon
+disable_service rabbit
+disable_service tempest
+##disable_service mysql 
+##enable_service qpid
+#enable_service n-cpu,n-net,n-api,n-vol
+# g-api,g-reg,key,n-api,n-crt,n-obj,n-cpu,n-net,n-cond,cinder,c-sch,c-api,c-vol,n-sch,n-novnc,n-xvnc,n-cauth,horizon,rabbit,tempest,mysql,n-cpu,n-net,n-api,n-vol
+
+disable_all_services
+enable_service qpid n-cpu n-net n-api n-vol
+
+
+# Replace with your primary interface name
+HOST_IP_IFACE=eth0
+PUBLIC_INTERFACE=eth0
+VLAN_INTERFACE=eth0
+FLAT_INTERFACE=eth0
+
+# Replace with whatever password you wish to use
+MYSQL_PASSWORD=badpassword
+SERVICE_TOKEN=badpassword
+SERVICE_PASSWORD=badpassword
+ADMIN_PASSWORD=badpassword
+
+# Pre-populate glance with a minimal image and a Fedora 17 image
+IMAGE_URLS="http://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-uec.tar.gz,http://berrange.fedorapeople.org/images/2012-11-15/f17-x86_64-openstack-sda.qcow2"
+
+#ENABLED_SERVICES=n-cpu,n-net,n-api,n-vol # REMOVE THIS LINE FOR THE CONTROLLER
+#RABBIT_PASSWORD=d83acc200f2fa34b127a
+
+MYSQL_HOST=$SERVICE_HOST
+RABBIT_HOST=$SERVICE_HOST
+GLANCE_HOSTPORT=$SERVICE_HOST:9292
+Q_HOST=$SERVICE_HOST
