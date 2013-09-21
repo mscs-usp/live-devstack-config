@@ -5,6 +5,9 @@ sudo service rpcbind start
 sudo mkdir -p /var/lib/nova/instances
 sudo mount -o hard,intr,noatime 10.7.22.10:/nova-instances /var/lib/nova/instances
 
+# Clean logs:
+sudo /opt/stack/openstack-neat/all-clean-logs.sh
+
 # ----
 
 # 1. Clone/pull OpenStack-neat
