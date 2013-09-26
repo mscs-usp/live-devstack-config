@@ -1,0 +1,28 @@
+#VIRT_DRIVER=docker
+
+#SERVICE_HOST=10.11.0.40 # REMOVE THIS LINE FOR THE CONTROLLER
+# Stop DevStack polluting /opt/stack
+DESTDIR=/opt/stack/src/openstack
+
+# Switch to use QPid instead of RabbitMQ 
+disable_service rabbit
+disable_service n-cpu
+enable_service qpid
+#enable_service qpid, n-cpu,n-net,n-api,n-vol
+
+# Replace with your primary interface name
+HOST_IP_IFACE=em1
+PUBLIC_INTERFACE=em1
+VLAN_INTERFACE=em1
+FLAT_INTERFACE=em1
+
+# Replace with whatever password you wish to use
+MYSQL_PASSWORD=badpassword
+SERVICE_TOKEN=badpassword
+SERVICE_PASSWORD=badpassword
+ADMIN_PASSWORD=badpassword
+
+# Pre-populate glance with a minimal image and a Fedora 17 image
+IMAGE_URLS="http://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-uec.tar.gz #,http://berrange.fedorapeople.org/images/2012-11-15/f17-x86_64-openstack-sda.qcow2"
+
+#ENABLED_SERVICES=n-cpu,n-net,n-api,n-vol # REMOVE THIS LINE FOR THE CONTROLLER
